@@ -37,6 +37,7 @@ build/Release
 
 # Dependency directories
 node_modules/
+<<<<<<< HEAD
 jspm_packages/
 
 # TypeScript v1 declaration files
@@ -62,3 +63,7 @@ typings/
 
 # next.js build output
 .next
+=======
+obj/
+bin/
+>>>>>>> api route log params & others

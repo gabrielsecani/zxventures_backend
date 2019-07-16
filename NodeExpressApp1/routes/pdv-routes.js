@@ -4,7 +4,7 @@ var router = express.Router();
 var pdvController = require('../controller/pdv-controller')
 
 router.use(async (req, res, n) => {
-    console.log('API v1', req.ips, req.ip, req.originalUrl, JSON.stringify({q: req.query, p: req.param }));
+    console.log('API v1', req.ips, req.ip, req.originalUrl, JSON.stringify({ q: req.query, p: req.params }));
     await n();
 })
 /* GET all pdv listing. */

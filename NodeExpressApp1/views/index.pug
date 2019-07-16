@@ -10,6 +10,12 @@ block content
     li
         a(href="/pdv/v1/2") get byId 2
     li
+        a(href="/pdv/v1/search/-38.561737/-3.736494") Search by LngLat SOS Cerveja Felipe Rudenberg
+    li
+        a(href="/pdv/v1/search/-43.406246/-22.883915") Search by LngLat Bar do Ze Daniboy
+    li 
+        a(href="/pdv/v1/populate/1") Delete all and do populate again
+    li
         p Create PDV
         pre
             | curl --location --request POST "http://localhost:3000/pdv/v1/create" \
@@ -149,10 +155,3 @@ block content
             | }
             | }"
 
-    li
-        a(href="/pdv/v1/search/-38.561737/-3.736494") Search by LngLat SOS Cerveja Felipe Rudenberg
-    li
-        a(href="/pdv/v1/search/-43.406246/-22.883915") Search by LngLat Bar do Ze Daniboy
-    li 
-        a(href="/pdv/v1/populate/1") Delete all and do populate again
-    

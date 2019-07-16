@@ -17,6 +17,7 @@ git clone https://github.com/gabrieltr/zxventures_backend
 
 docker-compose build --parallel --compress
 docker-compose up
+docker ps
 ```
 
 Start a browser on localhost on port 80.
@@ -62,15 +63,6 @@ MONGODB=mongodb://localhost:27017/pdv
 This project has 3 endpoints and will have more detail documentation on the following link at Postman:
 
 * [API Documentarion](https://documenter.getpostman.com/view/283720/S17rvoEo/) - I published the details to use the API at Postman
-
-
-
-## Deployment
-
-Ready to deploy to production.
-Just run "npm install / start" on a production server.
-
-or using up Docker containers.
 
 
 ## Author
