@@ -18,7 +18,7 @@ services:
     image: gabrielltr/ngapi
     container_name: nginx1
     ports:
-      - "81:80"
+      - "80:80"
       - "443:443"
     networks: 
       - nw-pdv
