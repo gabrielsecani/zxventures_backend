@@ -1,0 +1,18 @@
+﻿extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+  p List of endpoints
+  ul
+    li 
+        a(href="/pdv/v1/all") get all
+    li
+        a(href="/pdv/v1/5d2ceedf9684d907981fdba1") get byId
+    li
+        a(href="/pdv/v1/search/-38.561737/-3.736494") Search by LngLat SOS Cerveja Felipe Rudenberg
+    li
+        a(href="/pdv/v1/search/-43.406246/-22.883915") Search by LngLat Bar do Ze Daniboy
+    li 
+        a(href="/pdv/v1/populate") populate
+    

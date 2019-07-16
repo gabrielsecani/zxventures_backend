@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+
+  mongodb:
+    image: mongo
+    ports:
+      - "27017:27017"
+    networks: 
+      - nw-pdv
+
+  nginx1: 
+    build: 
+      dockerfile: ./docker/nginx.dockerfile
+      context: .
+    image: gabrielltr/ngapi
+    container_name: nginx1
+    ports:
+      - "81:80"
+    networks: 
+      - nw-pdv
+    depends_on:
+      - "nodepdv"
+
+  nodepdv:
+    build:
+      dockerfile: ./docker/pdv.dockerfile
+      context: .
+    image: gabrielltr/pdv
+    container_name: nodepdv
+    ports:
+      - "3000"
+    networks: 
+      - nw-pdv
+    depends_on:
+      - "mongodb"
+
+networks: 
+  nw-pdv: 
+    driver: bridge
