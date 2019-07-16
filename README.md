@@ -60,9 +60,16 @@ MONGODB=mongodb://localhost:27017/pdv
 
 ### API Documentation
 
-This project has 3 endpoints and will have more detail documentation on the following link at Postman:
+This project has the following endpoints:
 
-* [API Documentarion](https://documenter.getpostman.com/view/283720/S17rvoEo/) - I published the details to use the API at Postman
+* get all (/pdv/v1/all)
+* get byId :id  (/pdv/v1/:id)
+* post create (/pdv/v1/create)
+* Search by :Lng :Lat (/pdv/v1/search/:lng/:lat)
+* Delete all and do populate again (/pdv/v1/populate/1)
+
+*See [index](http://localhost) of running this project to samples*
+
 
 
 ## Author
