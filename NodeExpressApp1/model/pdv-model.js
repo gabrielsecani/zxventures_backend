@@ -3,6 +3,10 @@
 const Schema = mongoose.Schema;
 
 const pdvSchema = new Schema({
+    id: {
+        type: Number,
+        unique: true
+    },
     tradingName: {
         type: String
     },
@@ -39,9 +43,9 @@ const pdvSchema = new Schema({
 });
 
 //pdvSchema.virtual('id').get(function (value, virtual, doc) {
-//    return this._id;
+//    return this.pdvId;
 //}).set(function (value, virtual, doc) {
-//    this._id = value;
+//    this.pdvId = value;
 //});
 
 const Pdv = mongoose.model('Pdv', pdvSchema);

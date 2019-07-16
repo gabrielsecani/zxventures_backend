@@ -24,10 +24,11 @@ class PdvDao {
      */
     findById(id) {
         return new Promise((resolve, reject) => {
-
-            db.Pdv.findOne({ _id: id }, (error, pdv) => {
-
-                if (error) { return reject(error) }
+            db.Pdv.findOne({ id: id }, (error, pdv) => {
+                if (error) {
+                    console.error(error);
+                    return reject(error)
+                }
 
                 return resolve(pdv);
             });
@@ -56,9 +57,7 @@ class PdvDao {
      * @param {latitude} lat 
      */
     search(lng, lat) {
-
         return new Promise((resolve, reject) => {
-
             let userLocation = {
                 type: 'Point',
                 coordinates: [lng, lat]
@@ -100,21 +99,32 @@ class PdvDao {
     /**
      * Populate PDVS
      */
-    populate() {
+    async populate(recreate) {
+        console.info('Pdv Check Populating');
+        if (recreate) {
+            await db.Pdv.deleteMany();
+        }
         db.Pdv.estimatedDocumentCount((err, count) => {
             if (err) {
                 console.error('Populate count error!', err);
+                return err;
             } else {
-                if (count === 0) {
-                    console.info('Populating PDVs: reading file', jsonFile);
+                console.info('Pdv Population: ', count);
+                if (count <= 1) {
+                    console.debug('Populating PDVs: reading base file');
                     const jsonFile = require('./pdvs.json');
-                    console.info('Populating PDVs: inserting', jsonFile);
-                    return db.Pdv.insertMany(jsonFile.pdvs);
+                    const pdvs = jsonFile.pdvs;
+                    /*.map(v => {
+                        v.pdvId = v.id;
+                        //delete v.id;
+                        return v;
+                    });*/
+                    console.debug('Populating PDVs: inserting', pdvs);
+                    return db.Pdv.insertMany(pdvs, (e, d) => { console.info('pdvDAO.populated', e, d); });
                 }
             }
         });
     }
-
 }
 
 var pdvDao = new PdvDao();

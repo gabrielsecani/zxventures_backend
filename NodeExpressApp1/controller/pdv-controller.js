@@ -11,7 +11,7 @@ class PdvController {
     async create(req, res) {
 
         if (!req.body) {
-            return res.status(400).end();
+            return res.json({ errors: 'No body content' }).status(400).end();
         }
 
         const validations = pdvValidation.createValitador;
@@ -25,13 +25,13 @@ class PdvController {
         //const pdvDao = new PdvDao();
         pdvDao.save(req.body)
             .then((pdvCreated) => {
-                res.set('Location', req.route.path + '/' + pdvCreated._id);
+                res.set('Location', req.route.path + '/' + pdvCreated.id);
                 return res.status(201).json(pdvCreated).end();
             })
             .catch((error) => {
                 if (error) {
                     if (error.code == "11000") {
-                        return res.status(400).send("PDV already is in database.").end();
+                        return res.status(400).send("PDV is already in database.").end();
                     }
                     return res.status(500).end();
                 }
@@ -98,7 +98,7 @@ class PdvController {
 
         const validations = pdvValidation.getByIdValitador;
         await Promise.all(validations.map(validation => validation.run(req)));
-        
+
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return res.json({ errors: errors.array() }).status(400).send().end();
@@ -117,7 +117,7 @@ class PdvController {
                 return res.status(200).json(pdv).end();
             })
             .catch(erro => {
-                return res.status(500).end();
+                return res.json(erro).status(400).end();
             });
     }
 
@@ -125,9 +125,10 @@ class PdvController {
      * Route to populate PDVs from pdvs.json file (used for tests only)
      */
     populate(req, res) {
-        console.log('populate')
+        const recreate = req.params.recreate;
 
-        pdvDao.populate();
+        console.log('populate ', recreate);
+        pdvDao.populate(recreate);
         console.log('populate done')
 
         return res.status(201).end();

@@ -15,9 +15,8 @@ const searchValitador = [
 
 const getByIdValitador = [
     param('id').exists().withMessage('Id must exists'),
-    //param('id').isFloat().withMessage('Id must be a number'),
-    //param('id').isFloat().withMessage('Id must be a number'),
-    param('id').matches(/^[0-9a-fA-F]{24}$/).withMessage("Id format is invalid"),
+    param('id').isFloat().withMessage('Id must be a number'),
+    //param('id').matches(/^[0-9a-fA-F]{24}$/).withMessage("Id format is invalid"),
 ]
 
 module.exports = {

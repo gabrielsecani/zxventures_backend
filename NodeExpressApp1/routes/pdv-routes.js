@@ -8,7 +8,7 @@ router.use(async (req, res, n) => {
     await n();
 })
 /* GET all pdv listing. */
-router.get('/populate', pdvController.populate);
+router.get('/populate/:recreate', pdvController.populate);
 
 /* GET all pdv listing. */
 router.get('/all', pdvController.getAll);

@@ -1,9 +1,11 @@
-version: '3'
+version: '3.7'
 
 services:
 
   mongodb:
     image: mongo
+    volumes:
+       - db-data:/data/db
     ports:
       - "27017:27017"
     networks: 
@@ -17,6 +19,7 @@ services:
     container_name: nginx1
     ports:
       - "81:80"
+      - "443:443"
     networks: 
       - nw-pdv
     depends_on:
@@ -30,6 +33,10 @@ services:
     container_name: nodepdv
     ports:
       - "3000"
+    deploy:
+      mode: replicated
+      replicas: 3
+      endpoint_mode: dnsrr
     networks: 
       - nw-pdv
     depends_on:
@@ -38,3 +45,7 @@ services:
 networks: 
   nw-pdv: 
     driver: bridge
+
+volumes:
+  db-data:
+
