@@ -31,7 +31,7 @@ class PdvController {
             .catch((error) => {
                 if (error) {
                     if (error.code == "11000") {
-                        return res.status(400).send("PDV is already in database.").end();
+                        return res.status(409).send("PDV ID is already in use on database.").end();
                     }
                     return res.status(500).end();
                 }
@@ -61,7 +61,7 @@ class PdvController {
             })
             .catch(error => {
                 if (error.code == 2) {
-                    return res.status(400).send(error.errmsg).end();
+                    return res.status(406).send(error.errmsg).end();
                 }
                 return res.status(500).end();
             });
@@ -117,21 +117,21 @@ class PdvController {
                 return res.status(200).json(pdv).end();
             })
             .catch(erro => {
-                return res.json(erro).status(400).end();
+                return res.json(erro).status(406).end();
             });
     }
 
     /**
      * Route to populate PDVs from pdvs.json file (used for tests only)
      */
-    populate(req, res) {
+    async populate(req, res) {
         const recreate = req.params.recreate;
 
         console.log('populate ', recreate);
-        pdvDao.populate(recreate);
+        await pdvDao.populate(recreate);
         console.log('populate done')
 
-        return res.status(201).end();
+        return res.status(201).render('index').end();
     }
 
 }
